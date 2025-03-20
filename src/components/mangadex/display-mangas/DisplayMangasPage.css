@@ -41,7 +41,7 @@
   background-color: #363636;
   padding: 10px;
   border-radius: 8px;
-  height: 100%;
+  height: 100%; /* Critical: fills grid cell */
 }
 
 .manga-container:hover {
@@ -49,16 +49,19 @@
 }
 
 .manga-image-box {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 70%;
+  padding: 10px 0px;
   border-bottom: solid thin;
+  overflow: hidden;
 }
 
 .manga-container img {
-  width: 128px;
-  height: min-content;
+  max-height: 100%;
+  max-width: 75%;
+  object-fit: contain;
 }
 
 .manga-title-box {

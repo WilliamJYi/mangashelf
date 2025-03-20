@@ -14,7 +14,6 @@ const DisplayChapters = () => {
           `http://localhost:5000/chapters/${id}`
         );
         setChapters(response.data.data); // Update state with fetched data
-        console.log(response.data);
       } catch (error) {
         console.error("Error fetching chapters:", error);
       }
@@ -31,11 +30,16 @@ const DisplayChapters = () => {
           {chapters
             .filter(({ attributes }) => attributes.translatedLanguage === "en")
             .map(({ id, attributes }) => (
-              <div>
+              <div key={id}>
                 <p>Chapter: {attributes.chapter}</p>
-                <Link key={id} to={`/reader/${id}`}>
-                  {attributes.title}
-                </Link>
+                {attributes.pages ? (
+                  <Link to={`/mangadex/chapter/${id}`}>{attributes.title}</Link>
+                ) : (
+                  <span>
+                    <a href={attributes.externalUrl}>{attributes.title}</a> —
+                    Not On Mangadex
+                  </span>
+                )}
               </div>
             ))}
         </div>
