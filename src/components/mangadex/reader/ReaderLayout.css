@@ -1,0 +1,86 @@
+.reader-layout-container {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px;
+  background-color: #1e1e1e;
+  color: white;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;
+  transform: translateX(0); /* Visible by default */
+}
+
+.sidebar.collapsed {
+  transform: translateX(-100%); /* Move sidebar off screen when collapsed */
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar.collapsed ul {
+  display: none;
+}
+
+.sidebar a {
+  color: white;
+  text-decoration: none;
+}
+
+.toggle-button {
+  position: fixed; /* Always visible */
+  top: 20px;
+  left: 20px;
+  background-color: #1e1e1e;
+  color: white;
+  border: none;
+  font-size: 1.5rem;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 11; /* Above sidebar */
+  border-radius: 5px;
+}
+
+.toggle-button.collapsed {
+  background-color: #242424;
+}
+
+.switch-view-button {
+  background-color: #363636;
+  padding: 8px 12px;
+  cursor: pointer;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.select-mode-dropdown {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.select-mode-dropdown select {
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  font-size: 1rem;
+}

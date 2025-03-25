@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%; /* Make it responsive */
+  padding: 40px 0;
 }
 
 .mangadex-search-form {
@@ -20,8 +21,8 @@
 .manga-list {
   /* width: 100%; */
   display: grid;
-  /* grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  /* grid-template-columns: repeat(8, 1fr); */
   grid-auto-rows: 1fr; /* Key part: make all rows equal height */
   column-gap: 20px;
   row-gap: 40px;

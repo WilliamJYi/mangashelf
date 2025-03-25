@@ -18,8 +18,8 @@ router.get("/", async (req, res) => {
 // Get List of Mangas Based on Title
 router.get("/search", async (req, res) => {
   try {
-    const cachekey = `title:${req.query.title}`;
-    const cacheTitle = await redisClient.get(cachekey);
+    const cacheKey = `title:${req.query.title}`;
+    const cacheTitle = await redisClient.get(cacheKey);
 
     if (cacheTitle) {
       console.log("Serving cached title from Redis");
@@ -34,10 +34,34 @@ router.get("/search", async (req, res) => {
       },
     });
 
-    await redisClient.set(cachekey, JSON.stringify(response.data), {
+    await redisClient.set(cacheKey, JSON.stringify(response.data), {
       EX: 86400,
     });
 
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching external API:", error);
+    res.status(500).json({ message: "Error fetching data" });
+  }
+});
+
+// Get Manga Info Based on Manga id
+router.get("/search/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const cacheKey = `id:${id}`;
+    const cacheManga = await redisClient.get(cacheKey);
+
+    if (cacheManga) {
+      return res.json(JSON.parse(cacheManga));
+    }
+
+    const response = await axios.get(`${baseUrl}/manga/${id}`);
+
+    await redisClient.set(cacheKey, JSON.stringify(response.data), {
+      EX: 86400,
+    });
     res.json(response.data);
   } catch (error) {
     console.error("Error fetching external API:", error);

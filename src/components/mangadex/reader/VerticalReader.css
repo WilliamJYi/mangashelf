@@ -1,0 +1,57 @@
+.vertical-reader-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.vertical-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.vertical-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.back-to-top-button {
+  margin: 30px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #1e1e1e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.back-to-top-button:hover {
+  background-color: #333;
+}
+
+.progress-bar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 8px;
+  width: 100%;
+  display: flex;
+  z-index: 100;
+}
+
+.progress-segment {
+  background-color: #363636;
+  flex: 1;
+}
+
+.progress-segment:hover {
+  background-color: #cecece;
+}
+
+.progress-segment.active {
+  background-color: #e6e6e6;
+}

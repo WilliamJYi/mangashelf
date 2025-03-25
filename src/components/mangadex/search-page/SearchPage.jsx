@@ -8,7 +8,7 @@ const SearchPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate(`/mangadex/search?title=${encodeURIComponent(title)}`);
+    navigate(`/mangadex/?title=${encodeURIComponent(title)}`);
   };
 
   const handleChange = (e) => {

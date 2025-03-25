@@ -1,4 +1,40 @@
-.chapters-container {
+.display-chapters-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+}
+
+.manga-details {
+  display: flex;
+  flex-direction: row; /* <-- row = side by side */
+  background-color: #363636;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.manga-details img {
+  width: 250px;
+  height: auto;
+  object-fit: cover;
+}
+
+.manga-description {
+  max-width: 600px;
+  text-align: left;
+}
+
+.chapters-table {
+  width: 1000px;
+  border-collapse: collapse;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.chapters-table th,
+.chapters-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
 }

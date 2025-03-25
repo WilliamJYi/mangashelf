@@ -1,0 +1,14 @@
+.horizontal-reader-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: calc(100vh - 5px); /* fix later */
+}
+
+.horizontal-page {
+  height: calc(100vh - 10px);
+  user-select: none;
+}

@@ -6,9 +6,7 @@ const Home = () => {
     <div>
       <h1>Simple Manga Reader</h1>
       <div>
-        <Link to="/mangadex">
-          <button>Read from Imgur</button>
-        </Link>
+        {/* Add route to imgur pages later */}
         <Link to="/mangadex">
           <button>Read from MangaDex</button>
         </Link>

@@ -3,7 +3,7 @@ import { Link, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import "./DisplayMangasPage.css";
 
-const MangaDexSearchPage = () => {
+const DisplayMangasPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [titleInput, setTitleInput] = useState(searchParams.get("title") || "");
   const title = searchParams.get("title");
@@ -26,6 +26,10 @@ const MangaDexSearchPage = () => {
             (relationship) => relationship.type === "cover_art"
           )?.id;
 
+          const authorId = manga.relationships.find(
+            (relationship) => relationship.type === "author"
+          )?.id;
+
           if (coverId) {
             const coverResponse = await axios.get(
               `http://localhost:5000/covers/${coverId}`
@@ -34,7 +38,9 @@ const MangaDexSearchPage = () => {
             return {
               id: manga.id,
               title: manga.attributes.title.en,
+              author: authorId,
               image: coverResponse.data,
+              description: manga.attributes.description.en,
             };
           }
 
@@ -42,6 +48,7 @@ const MangaDexSearchPage = () => {
             id: manga.id,
             title: manga.attributes.title.en,
             image: null,
+            description: manga.attributes.description.en,
           };
         });
 
@@ -104,4 +111,4 @@ const MangaDexSearchPage = () => {
   );
 };
 
-export default MangaDexSearchPage;
+export default DisplayMangasPage;

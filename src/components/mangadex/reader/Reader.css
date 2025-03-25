@@ -1,9 +1,0 @@
-.image-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.chapter-image {
-  width: 750px;
-  margin: 10px;
-}
