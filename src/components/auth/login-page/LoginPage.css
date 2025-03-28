@@ -1,0 +1,52 @@
+.login-container {
+  background-color: #363636;
+  padding: 20px;
+  border-radius: 8px;
+  width: 300px;
+}
+
+.login-form .form-group {
+  margin-bottom: 15px;
+}
+
+.login-form .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.login-form .form-group input {
+  width: 94%; /* Change later */
+  padding: 8px;
+  border: 1px solid white;
+  border-radius: 4px;
+}
+
+.login-form button {
+  margin: 5px 0;
+}
+
+.login-form .password-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-form .password-container input {
+  width: 100%;
+  padding-right: 50px;
+}
+
+.login-form .toggle-password {
+  position: absolute;
+  right: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: grey;
+}
+
+.login-form .toggle-password:hover {
+  text-decoration: underline;
+}

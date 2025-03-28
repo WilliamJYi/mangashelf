@@ -88,7 +88,7 @@ const ReaderLayout = () => {
   return (
     <div className="reader-layout-container">
       <button
-        className={`toggle-button ${isOpen ? "open" : "collapsed"}`}
+        className={`reader-toggle-button ${isOpen ? "open" : "collapsed"}`}
         onClick={() => setIsOpen(!isOpen)}
       >
         {isOpen ? "←" : "≡"}
@@ -97,18 +97,6 @@ const ReaderLayout = () => {
       <aside className={`sidebar ${isOpen ? "open" : "collapsed"}`}>
         {isOpen && (
           <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link
-                to={`/mangadex${
-                  location.state?.id ? `/title/${location.state.id}` : ""
-                }`}
-              >
-                Back to Chapters
-              </Link>
-            </li>
             <li>
               <div className="select-mode-dropdown">
                 <select
