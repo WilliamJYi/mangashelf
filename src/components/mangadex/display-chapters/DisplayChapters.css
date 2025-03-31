@@ -6,6 +6,7 @@
 }
 
 .manga-details {
+  position: relative;
   display: flex;
   flex-direction: row; /* <-- row = side by side */
   background-color: #363636;
@@ -22,8 +23,20 @@
 }
 
 .manga-description {
-  max-width: 600px;
+  max-width: 680px;
+  height: 100%;
   text-align: left;
+}
+
+.manga-description button {
+  position: fixed;
+  margin-top: auto;
+}
+
+.favourites-button {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 
 .chapters-table {

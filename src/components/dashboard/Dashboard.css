@@ -1,0 +1,28 @@
+.favourites-container {
+  text-align: left;
+}
+
+.favourites-title {
+  margin-left: 20px;
+}
+
+.favourites-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px 20px;
+  justify-content: left;
+  padding: 0px 20px;
+}
+
+.favourites-list .manga-container {
+  max-width: 200px;
+}
+
+.history-container {
+  text-align: left;
+  margin-top: 40px;
+}
+
+.history-title {
+  margin-left: 20px;
+}

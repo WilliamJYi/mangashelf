@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import "./DisplayChapters.css";
+import supabase from "../../../supabase-client/SupabaseClient";
+import AuthContext from "../../auth/AuthContext";
 
 const DisplayChapters = () => {
+  const { isLoggedIn, userInfo, userFavourites } = useContext(AuthContext);
   const [chapters, setChapters] = useState([]); // Store fetched data
   const { id } = useParams();
   const [details, setDetails] = useState({
@@ -12,6 +15,7 @@ const DisplayChapters = () => {
     cover: "",
     description: "",
   });
+  const [isFavourited, setIsFavourited] = useState(false);
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -57,6 +61,37 @@ const DisplayChapters = () => {
     fetchCover();
   }, [id]);
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      const existsInFavourites = userFavourites.some(
+        (favourite) => favourite.manga_id === id
+      );
+      setIsFavourited(existsInFavourites);
+    }
+  });
+
+  const handleAddToFavourite = async () => {
+    const { error } = await supabase.from("favorites").insert([
+      {
+        user_id: userInfo.id,
+        manga_id: id,
+        title: details.title,
+        cover_url: details.cover,
+      },
+    ]);
+    if (error) console.log(error);
+    setIsFavourited(true);
+  };
+
+  const handleRemoveFromFavourite = async () => {
+    const { error } = await supabase
+      .from("favorites")
+      .delete()
+      .eq("manga_id", id);
+    if (error) console.log(error);
+    setIsFavourited(false);
+  };
+
   const displayChapters = () => {
     return chapters
       .filter(({ attributes }) => attributes.translatedLanguage === "en")
@@ -92,8 +127,21 @@ const DisplayChapters = () => {
           <div className="manga-details">
             <img src={details?.cover} alt="Manga Cover" />
             <div className="manga-description">
-              <p>{details?.description || ""}</p>
+              <p>{details?.description.split("---")[0] || ""}</p>
             </div>
+            <button
+              className="favourites-button"
+              onClick={
+                isFavourited ? handleRemoveFromFavourite : handleAddToFavourite
+              }
+              disabled={!isLoggedIn}
+            >
+              {!isLoggedIn
+                ? "Log in to favourite"
+                : isFavourited
+                ? "Remove from favourites"
+                : "Add to favourites"}
+            </button>
           </div>
 
           <table className="chapters-table">
