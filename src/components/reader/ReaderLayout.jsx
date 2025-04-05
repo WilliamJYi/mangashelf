@@ -40,7 +40,9 @@ const ReaderLayout = () => {
   useEffect(() => {
     const fetchPages = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/chapter/${id}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/chapter/${id}`
+        );
 
         const pagesResponse = response.data.server.chapter;
         const chapterResponse = response.data.chapter;
@@ -119,7 +121,7 @@ const ReaderLayout = () => {
   const fetchChapters = async (mangaId) => {
     try {
       const response = await axios.get(
-        `http://localhost:5000/chapters/${mangaId}`
+        `${import.meta.env.VITE_BACKEND_URL}/chapters/${mangaId}`
       );
 
       const allChapters = response.data.data;

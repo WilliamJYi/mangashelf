@@ -23,7 +23,7 @@ const DisplayChapters = () => {
     const fetchChapters = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:5000/chapters/${id}`
+          `${import.meta.env.VITE_BACKEND_URL}/chapters/${id}`
         );
 
         const allChapters = response.data.data;
@@ -49,14 +49,16 @@ const DisplayChapters = () => {
   useEffect(() => {
     const fetchCover = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/search/${id}`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_URL}/search/${id}`
+        );
 
         const coverId = response.data.data.relationships.find(
           (relationship) => relationship.type === "cover_art"
         ).id;
 
         const coverResponse = await axios.get(
-          `http://localhost:5000/covers/${coverId}`
+          `${import.meta.env.VITE_BACKEND_URL}/covers/${coverId}`
         );
 
         const title = response.data.data.attributes.title.en || "";

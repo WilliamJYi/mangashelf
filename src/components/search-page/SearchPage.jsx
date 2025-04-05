@@ -24,7 +24,7 @@ const SearchPage = () => {
     try {
       setIsLoading(true);
       const response = await axios.get(
-        `http://localhost:5000/search?title=${title}`
+        `${import.meta.env.VITE_BACKEND_URL}/search?title=${title}`
       );
 
       const mangasData = response.data.data;
@@ -41,7 +41,7 @@ const SearchPage = () => {
 
         if (coverId) {
           const coverResponse = await axios.get(
-            `http://localhost:5000/covers/${coverId}`
+            `${import.meta.env.VITE_BACKEND_URL}/covers/${coverId}`
           );
 
           return {
