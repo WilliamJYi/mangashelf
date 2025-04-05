@@ -118,9 +118,7 @@ router.get("/chapter/:id", async (req, res) => {
       return res.json(JSON.parse(cachedChapter));
     }
 
-    const imageResponse = await axios.get(
-      `https://api.mangadex.org/at-home/server/${id}`
-    );
+    const imageResponse = await axios.get(`${baseUrl}/at-home/server/${id}`);
     const chapterResponse = await axios.get(`${baseUrl}/chapter/${id}`);
 
     const imageData = imageResponse.data;
@@ -160,7 +158,7 @@ router.get("/covers/:id", async (req, res) => {
     }
 
     // Get cover details
-    const response = await axios.get(`https://api.mangadex.org/cover/${id}`);
+    const response = await axios.get(`${baseUrl}/cover/${id}`);
     const coverId = response.data.data.relationships[0].id;
     const fileName = response.data.data.attributes.fileName;
 
