@@ -27,6 +27,7 @@ const Navbar = () => {
       <aside className={`navbar ${isOpen ? "open" : "collapsed"}`}>
         <div className="nav-links">
           <Link to="/">Home</Link>
+          <Link to="/search">Search</Link>
           <div>
             {isLoggedIn ? (
               <div className="authenticated-nav-links">

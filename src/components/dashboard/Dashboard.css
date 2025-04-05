@@ -1,5 +1,20 @@
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.profile-content-container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .favourites-container {
   text-align: left;
+  width: 100%;
+  max-width: 1000px;
 }
 
 .favourites-title {
@@ -16,13 +31,87 @@
 
 .favourites-list .manga-container {
   max-width: 200px;
+  /* border: 1px solid grey; */
 }
 
 .history-container {
   text-align: left;
-  margin-top: 40px;
+  margin: 40px 0;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.history-header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .history-title {
-  margin-left: 20px;
+  position: absolute;
+  left: 20px;
+}
+
+.clear-all-history-button {
+  position: absolute;
+  right: 20px;
+}
+
+.change-page-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  gap: 16px;
+}
+
+.history-container .chapters-table {
+  margin-top: -10px;
+  padding: 0px 20px;
+  border-collapse: separate;
+  border-spacing: 0 10px; /* Row gap */
+}
+
+.chapters-table th,
+.chapters-table td {
+  background-color: #363636;
+  border: none;
+  padding: 10px;
+  text-align: left;
+}
+
+.chapters-table td:first-child {
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+}
+
+.chapters-table td:last-child {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.chapters-table tr:hover td {
+  background-color: #4a4a4a !important;
+  cursor: pointer;
+}
+
+.chapters-table th:nth-child(1),
+.chapters-table td:nth-child(1) {
+  width: 20%;
+}
+
+.chapters-table th:nth-child(2),
+.chapters-table td:nth-child(2) {
+  width: 50%;
+}
+
+.chapters-table th:nth-child(3),
+.chapters-table td:nth-child(3) {
+  width: 25%;
+}
+
+.chapters-table th:nth-child(4),
+.chapters-table td:nth-child(4) {
+  width: 10%;
 }

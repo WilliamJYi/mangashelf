@@ -66,49 +66,63 @@ const SignUp = () => {
 
   return (
     <div className="signup-container">
-      <h2>Create Account</h2>
-      <p>{message ? message + "!" : ""}</p>
-      <form className="signup-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username: </label>
-          <input
-            id="username"
-            name="username"
-            type="text"
-            placeholder="Enter your username"
-            value={formData.username || ""}
-            onChange={handleChange}
-            required
-          />
+      <div className="signup-form-container">
+        <h2>Create Account</h2>
+        <p>{message ? message + "!" : ""}</p>
+        <form className="signup-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username: </label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              placeholder="Enter your username"
+              value={formData.username || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email: </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              value={formData.email || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password: </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              value={formData.password || ""}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          {/* <div className="form-group">
+            <label htmlFor="password">Confirm Password: </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              value={formData.password || ""}
+              onChange={handleChange}
+              required
+            />
+          </div> */}
+          <button type="submit">Sign Up</button>
+        </form>
+        <div>
+          Already have an account? <Link to="/login">Sign In</Link>
         </div>
-        <div className="form-group">
-          <label htmlFor="email">Email: </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Enter your email"
-            value={formData.email || ""}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password: </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="Enter your password"
-            value={formData.password || ""}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit">Sign Up</button>
-      </form>
-      <div>
-        Already have an account? <Link to="/login">Sign In</Link>
       </div>
     </div>
   );

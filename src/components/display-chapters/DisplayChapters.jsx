@@ -2,11 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 import "./DisplayChapters.css";
-import supabase from "../../../supabase-client/SupabaseClient";
-import AuthContext from "../../auth/AuthContext";
+import supabase from "../../supabase-client/SupabaseClient";
+import AuthContext from "../auth/AuthContext";
 
 const DisplayChapters = () => {
-  const { isLoggedIn, userInfo, userFavourites } = useContext(AuthContext);
+  const { isLoggedIn, userInfo, userFavourites, setUserFavourites } =
+    useContext(AuthContext);
   const [chapters, setChapters] = useState([]); // Store fetched data
   const { id } = useParams();
   const [details, setDetails] = useState({
@@ -16,6 +17,7 @@ const DisplayChapters = () => {
     description: "",
   });
   const [isFavourited, setIsFavourited] = useState(false);
+  const [startingIndex, setStartingIndex] = useState(0);
 
   useEffect(() => {
     const fetchChapters = async () => {
@@ -23,7 +25,19 @@ const DisplayChapters = () => {
         const response = await axios.get(
           `http://localhost:5000/chapters/${id}`
         );
-        setChapters(response.data.data);
+
+        const allChapters = response.data.data;
+
+        // Remove duplicate chapters
+        const uniqueChapters = Array.from(
+          new Map(
+            allChapters
+              .filter((ch) => ch.attributes.chapter)
+              .map((ch) => [ch.attributes.chapter, ch])
+          ).values()
+        );
+
+        setChapters(uniqueChapters);
       } catch (error) {
         console.error("Error fetching chapters:", error);
       }
@@ -62,48 +76,83 @@ const DisplayChapters = () => {
   }, [id]);
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isLoggedIn && userFavourites) {
       const existsInFavourites = userFavourites.some(
         (favourite) => favourite.manga_id === id
       );
       setIsFavourited(existsInFavourites);
     }
-  });
+  }, []);
 
   const handleAddToFavourite = async () => {
-    const { error } = await supabase.from("favorites").insert([
-      {
-        user_id: userInfo.id,
-        manga_id: id,
-        title: details.title,
-        cover_url: details.cover,
-      },
-    ]);
+    const { data, error } = await supabase
+      .from("favorites")
+      .insert([
+        {
+          user_id: userInfo.id,
+          manga_id: id,
+          title: details.title,
+          cover_url: details.cover,
+        },
+      ])
+      .select()
+      .single();
     if (error) console.log(error);
+    const updatedFavourites = [...userFavourites, data];
+    setUserFavourites(updatedFavourites);
     setIsFavourited(true);
   };
 
   const handleRemoveFromFavourite = async () => {
+    const updatedFavourites = userFavourites.filter(
+      (favourite) => favourite.manga_id !== id
+    );
+
     const { error } = await supabase
       .from("favorites")
       .delete()
       .eq("manga_id", id);
     if (error) console.log(error);
+    setUserFavourites(updatedFavourites);
     setIsFavourited(false);
   };
 
+  const displayListCount = () => {
+    if (!chapters || chapters.length === 0) {
+      return <p>No Chapters</p>;
+    }
+    const total = chapters.length;
+    const start = startingIndex + 1;
+    const end = Math.min(startingIndex + 10, total);
+    return (
+      <p>
+        Showing <strong>{start}</strong>–<strong>{end}</strong> of{" "}
+        <strong>{total}</strong>
+      </p>
+    );
+  };
+
+  const handlePrev = () => {
+    if (startingIndex === 0) return;
+    setStartingIndex((prev) => prev - 10);
+  };
+
+  const handleNext = () => {
+    if (startingIndex + 10 >= chapters.length) return;
+    setStartingIndex((prev) => prev + 10);
+  };
+
   const displayChapters = () => {
-    return chapters
+    const chaptersToDisplay = chapters.slice(startingIndex, startingIndex + 10);
+
+    return chaptersToDisplay
       .filter(({ attributes }) => attributes.translatedLanguage === "en")
       .map(({ id: chapterId, attributes }) => (
         <tr className="chapter-container" key={chapterId}>
           <td>{attributes.chapter}</td>
           {attributes.pages ? (
             <td>
-              <Link
-                to={`/mangadex/chapter/${chapterId}/horizontal`}
-                state={{ id: id }}
-              >
+              <Link to={`/chapter/${chapterId}/horizontal`} state={{ id: id }}>
                 {attributes.title}
               </Link>
             </td>
@@ -119,10 +168,10 @@ const DisplayChapters = () => {
 
   return (
     <div className="display-chapters-container">
-      {!chapters || chapters.length === 0 || !details.cover ? (
+      {!chapters || !details.cover ? (
         <div>Loading...</div>
       ) : (
-        <div>
+        <div className="manga-header-container">
           <h1>{details?.title || ""}</h1>
           <div className="manga-details">
             <img src={details?.cover} alt="Manga Cover" />
@@ -142,6 +191,29 @@ const DisplayChapters = () => {
                 ? "Remove from favourites"
                 : "Add to favourites"}
             </button>
+          </div>
+          <div className="chapters-header-container">
+            {" "}
+            <p className="chapters-title">📖 CHAPTERS</p>
+            <div className="change-page-container">
+              <button
+                className="change-page-button"
+                onClick={handlePrev}
+                disabled={startingIndex === 0}
+              >
+                Back
+              </button>
+
+              {displayListCount()}
+
+              <button
+                className="change-page-button"
+                onClick={handleNext}
+                disabled={startingIndex + 10 >= chapters.length}
+              >
+                Next
+              </button>
+            </div>
           </div>
 
           <table className="chapters-table">

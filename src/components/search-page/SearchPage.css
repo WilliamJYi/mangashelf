@@ -1,0 +1,36 @@
+.search-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.search-wrapper {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 500px;
+  width: 100%;
+  gap: 20px;
+  margin: 20px 0 0 0;
+}
+
+.search-form input {
+  padding: 10px;
+}
+
+.loading-container,
+.no-results-container {
+  margin-top: 20px;
+}
