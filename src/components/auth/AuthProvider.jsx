@@ -63,7 +63,6 @@ const AuthProvider = ({ children }) => {
             setUserInfo(info);
             setIsLoggedIn(true);
 
-            // Fetch favorites
             const { data: favs, error: favError } = await supabase
               .from("favorites")
               .select("*")
@@ -71,7 +70,6 @@ const AuthProvider = ({ children }) => {
             if (favError) console.log(favError);
             if (favs) setUserFavourites(favs);
 
-            // Fetch history
             const { data: hist, error: histError } = await supabase
               .from("history")
               .select("*")

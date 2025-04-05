@@ -3,7 +3,6 @@
   z-index: 1;
 }
 
-/* Main navbar dropdown */
 .navbar {
   position: fixed;
   top: 0;
@@ -53,7 +52,6 @@
 
 .nav-links a {
   color: white;
-  /* transition: color 0.3s ease-in-out; */
 }
 
 .nav-links a:hover {

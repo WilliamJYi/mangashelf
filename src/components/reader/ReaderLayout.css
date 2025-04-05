@@ -21,11 +21,11 @@
   flex-direction: column;
   align-items: center;
   z-index: 10;
-  transform: translateX(0); /* Visible by default */
+  transform: translateX(0);
 }
 
 .sidebar.collapsed {
-  transform: translateX(-100%); /* Move sidebar off screen when collapsed */
+  transform: translateX(-100%);
 }
 
 .sidebar ul {
