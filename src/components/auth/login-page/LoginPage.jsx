@@ -40,46 +40,48 @@ const SignInPage = () => {
 
   return (
     <div className="login-container">
-      <h2>Login Page</h2>
-      <p>{message ? message + "!" : ""}</p>
-      <form className="login-form" onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email: </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="Enter your email"
-            value={email || ""}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password: </label>
-          <div className="password-container">
+      <div className="login-form-container">
+        <h2>Login Page</h2>
+        <p>{message ? message + "!" : ""}</p>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">Email: </label>
             <input
-              id="password"
-              name="password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your password"
-              value={password || ""}
-              onChange={(e) => setPassword(e.target.value)}
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email"
+              value={email || ""}
+              onChange={(e) => setEmail(e.target.value)}
               required
             />
-            <button
-              type="button"
-              className="toggle-password"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
           </div>
+          <div className="form-group">
+            <label htmlFor="password">Password: </label>
+            <div className="password-container">
+              <input
+                id="password"
+                name="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="Enter your password"
+                value={password || ""}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="toggle-password"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? "Hide" : "Show"}
+              </button>
+            </div>
+          </div>
+          <button type="submit">Sign In</button>
+        </form>
+        <div>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
         </div>
-        <button type="submit">Sign In</button>
-      </form>
-      <div>
-        Don't have an account? <Link to="/signup">Sign Up</Link>
       </div>
     </div>
   );

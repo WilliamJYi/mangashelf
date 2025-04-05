@@ -1,21 +1,7 @@
-.mangadex-search-page-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%; /* Make it responsive */
-  padding: 40px 0;
-}
-
-.mangadex-search-form {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  gap: 20px;
-  margin: 20px;
-}
-
-.mangadex-search-form input {
-  padding: 10px;
+.display-mangas-container {
+  width: 100%;
+  max-width: 1000px;
+  height: 100%;
 }
 
 .manga-list {
@@ -26,7 +12,7 @@
   grid-auto-rows: 1fr; /* Key part: make all rows equal height */
   column-gap: 20px;
   row-gap: 40px;
-  padding: 20px;
+  padding: 20px 0 40px 0;
 }
 
 .manga-list a {
@@ -43,6 +29,7 @@
   padding: 10px;
   border-radius: 8px;
   height: 100%; /* Critical: fills grid cell */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .manga-container:hover {
@@ -54,7 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0px;
+  padding: 10px 0px 20px 0;
   border-bottom: solid thin;
   overflow: hidden;
 }

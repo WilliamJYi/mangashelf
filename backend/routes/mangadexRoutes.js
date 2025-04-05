@@ -118,17 +118,24 @@ router.get("/chapter/:id", async (req, res) => {
       return res.json(JSON.parse(cachedChapter));
     }
 
-    const response = await axios.get(
+    const imageResponse = await axios.get(
       `https://api.mangadex.org/at-home/server/${id}`
     );
+    const chapterResponse = await axios.get(`${baseUrl}/chapter/${id}`);
 
-    const responseData = response.data;
+    const imageData = imageResponse.data;
+    const chapterData = chapterResponse.data;
 
-    await redisClient.set(cacheKey, JSON.stringify(responseData), {
+    const combinedResponese = {
+      server: imageData,
+      chapter: chapterData,
+    };
+
+    await redisClient.set(cacheKey, JSON.stringify(combinedResponese), {
       EX: 86400,
     });
 
-    res.json(responseData);
+    res.json(combinedResponese);
   } catch (error) {
     console.error("Error fetching external API:", error);
     res.status(500).json({ message: "Error fetching data" });
