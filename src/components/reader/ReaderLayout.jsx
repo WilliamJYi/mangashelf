@@ -46,6 +46,7 @@ const ReaderLayout = () => {
 
         const pagesResponse = response.data.server.chapter;
         const chapterResponse = response.data.chapter;
+        const { baseUrl } = response.data.server;
 
         if (!pagesResponse || !chapterResponse) return;
 
@@ -55,7 +56,7 @@ const ReaderLayout = () => {
           chapterResponse.data.attributes;
 
         const pagesArray = pages.map(
-          (page) => `https://uploads.mangadex.org/data/${hash}/${page}`
+          (page) => `${baseUrl}/data/${hash}/${page}`
         );
 
         const mangaId = chapterResponse.data.relationships.find(
