@@ -84,7 +84,7 @@ const ReaderLayout = () => {
   // Add manga and chapter details to history
   const addToHistory = async (mangaId, chapterTitle, chapter) => {
     const mangaResponse = await axios.get(
-      `http://localhost:5000/search/${mangaId}`
+      `${import.meta.env.VITE_BACKEND_URL}/search/${mangaId}`
     );
     const mangaTitle = mangaResponse.data.data.attributes.title.en || "";
 
