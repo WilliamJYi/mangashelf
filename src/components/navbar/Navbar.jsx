@@ -6,13 +6,26 @@ import supabase from "../../supabase-client/SupabaseClient";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useContext(AuthContext);
+  const {
+    isLoggedIn,
+    setIsLoggedIn,
+    setUserInfo,
+    setUserFavourites,
+    setUserHistory,
+  } = useContext(AuthContext);
 
   useEffect(() => {}, [isLoggedIn]);
 
   const handleLogout = async () => {
     let { error } = await supabase.auth.signOut();
+    if (error) {
+      console.log(error);
+      return;
+    }
     setIsLoggedIn(false);
+    setUserInfo({});
+    setUserFavourites([]);
+    setUserHistory([]);
   };
 
   return (
